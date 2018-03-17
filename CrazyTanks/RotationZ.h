@@ -1,0 +1,12 @@
+#ifndef ROTATION_Z_H
+#define ROTATION_Z_H
+
+enum RotationZ
+{
+	ROTATION_Z_UP,
+	ROTATION_Z_RIGHT,
+	ROTATION_Z_DOWN,
+	ROTATION_Z_LEFT
+};
+
+#endif // !ROTATION_Z_H

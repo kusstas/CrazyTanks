@@ -1,0 +1,2 @@
+﻿GameObject.obj : error LNK2001: неразрешенный внешний символ ""public: virtual void __thiscall GameObject::tick(float)" (?tick@GameObject@@UAEXM@Z)"
+C:\Users\FOXTROT\Source\Repos\CrazyTanks\Debug\CrazyTanks.exe : fatal error LNK1120: неразрешенных внешних элементов: 1
