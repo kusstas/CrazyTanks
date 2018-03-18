@@ -22,26 +22,10 @@ void Tank::tick(float deltaTime)
     if (isMove_)
     {
         durationMove += deltaTime;
-        if (durationMove > 0.1f)
+        if (durationMove > 0.05f)
         {
             durationMove = 0;
-            DVector2D newLocation;
-            switch (getRotationZ())
-            {
-            case ROTATION_Z_DOWN:
-                newLocation = getLocation() + DVector2D(0, 1);
-                break;
-            case ROTATION_Z_UP:
-                newLocation = getLocation() + DVector2D(0, -1);
-                break;
-            case ROTATION_Z_LEFT:
-                newLocation = getLocation() + DVector2D(-1, 0);
-                break;
-            case ROTATION_Z_RIGHT:
-                newLocation = getLocation() + DVector2D(1, 0);
-                break;
-            }
-            setLocation(newLocation);
+            GameObject::move(getRotationZ(), 1);
         }       
     }
 
@@ -50,29 +34,6 @@ void Tank::tick(float deltaTime)
 
 void Tank::onOverlap(GameObject& object, DVector2D location)
 {
-    if (object.isBlockObject() && isMove_)
-    {
-        if (getLocation() == object.getLocation())
-        {
-            DVector2D newLocation;
-            switch (getRotationZ())
-            {
-            case ROTATION_Z_DOWN:
-                newLocation = getLocation() + DVector2D(0, -1);
-                break;
-            case ROTATION_Z_UP:
-                newLocation = getLocation() + DVector2D(0, 1);
-                break;
-            case ROTATION_Z_LEFT:
-                newLocation = getLocation() + DVector2D(1, 0);
-                break;
-            case ROTATION_Z_RIGHT:
-                newLocation = getLocation() + DVector2D(-1, 0);
-                break;
-            }
-            setLocation(newLocation);
-        }
-    }
 }
 
 Pixel Tank::getDrawing() const
@@ -80,7 +41,7 @@ Pixel Tank::getDrawing() const
     switch (getRotationZ())
     {
     case ROTATION_Z_DOWN:
-        return Pixel('Y', COLOR_LIGHT_RED, COLOR_BLACK);
+        return Pixel('V', COLOR_LIGHT_RED, COLOR_BLACK);
     case ROTATION_Z_UP:
         return Pixel('A', COLOR_LIGHT_RED, COLOR_BLACK);
     case ROTATION_Z_LEFT:
@@ -111,7 +72,7 @@ void Tank::setIndexTeam(int indexTeam)
     indexTeam_ = indexTeam;
 }
 
-void Tank::move(RotationZ direct)
+void Tank::startMove(RotationZ direct)
 {
     isMove_ = true;
     setRotationZ(direct);

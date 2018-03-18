@@ -30,6 +30,9 @@ public:
     const DVector2D& getSize() const;
     const vector<GameObject*>& getGameObjects() const;
 
+    GameObject* getGameObjectFromLocation(DVector2D location);
+    GameObject* getGameObjectFromLocation(int x, int y);
+
     template <class T>
     T* createGameObject();
     GameObject* createGameObject();
@@ -42,6 +45,10 @@ protected:
     DVector2D offsetWorld_;
 
     vector<GameObject*> gameObjects;
+
+private:
+
+    void handleCollision();
 };
 
 template <class T>

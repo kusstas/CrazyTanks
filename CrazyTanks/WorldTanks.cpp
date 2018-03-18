@@ -23,31 +23,45 @@ void WorldTanks::beginPlay()
 {
     generateWalls();
     tank = createGameObject<Tank>();
-    tank->setLocation(18, 14);
+    tank->setLocation(1, 14);
+
+    Tank* t = createGameObject<Tank>();
+    t->setLocation(1, 3);
+    t->startMove(ROTATION_Z_DOWN);
 
     generateWalls();
 }
 
 void WorldTanks::tick(float deltaTime)
 {
-    _getch();
-    switch (_getch())
+    if (_kbhit())
     {
-    case 72:
-        tank->move(ROTATION_Z_UP);
-        break;
-    case 75:
-        tank->move(ROTATION_Z_LEFT);
-        break;
-    case 77:
-        tank->move(ROTATION_Z_RIGHT);
-        break;
-    case 80:
-        tank->move(ROTATION_Z_DOWN);
-        break;
-    default:
+        int ch = _getch();
+        if (ch == 0 || ch == 0xE0)
+        {
+            switch (_getch())
+            {
+            case 72:
+                tank->startMove(ROTATION_Z_UP);
+                break;
+            case 75:
+                tank->startMove(ROTATION_Z_LEFT);
+                break;
+            case 77:
+                tank->startMove(ROTATION_Z_RIGHT);
+                break;
+            case 80:
+                tank->startMove(ROTATION_Z_DOWN);
+                break;
+            default:
+                tank->stopMove();
+                break;
+            }
+        }
+    }
+    else
+    {
         tank->stopMove();
-        break;
     }
 
     World::tick(deltaTime);
@@ -103,8 +117,13 @@ void WorldTanks::generateWalls()
 
                 for (int k = y1; k <= y2; k++)
                 {
-                    Wall* w = createGameObject<Wall>();
-                    w->setLocation(x1 + stepX * i, k + stepY * j);
+                    DVector2D loc = DVector2D(x1 + stepX * i, k + stepY * j);
+
+                    if (getGameObjectFromLocation(loc) == nullptr)
+                    {
+                        Wall* w = createGameObject<Wall>();
+                        w->setLocation(loc);
+                    }
                 }
             }
             else
@@ -117,8 +136,13 @@ void WorldTanks::generateWalls()
 
                 for (int k = x1; k <= x2; k++)
                 {
-                    Wall* w = createGameObject<Wall>();
-                    w->setLocation(k + stepX * i, y1 + stepY * j);
+                    DVector2D loc = DVector2D(k + stepX * i, y1 + stepY * j);
+
+                    if (getGameObjectFromLocation(loc) == nullptr)
+                    {
+                        Wall* w = createGameObject<Wall>();
+                        w->setLocation(loc);
+                    }
                 }
             }
         }

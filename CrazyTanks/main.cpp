@@ -11,11 +11,11 @@
 
 using namespace std;
 
-const int FPS_MAX = 15;
+const int FPS_MAX = 10;
 
 int main()
 {
-    srand(time(0));
+    srand(static_cast<unsigned int>(time(0)));
 
     WindowsConsoleScreen screen;
     screen.setCursorVisible(false);

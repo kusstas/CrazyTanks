@@ -19,9 +19,11 @@ public:
 
     bool isActive() const;
     bool isStatic() const;
+    bool isMove() const;
     bool isBlockObject() const;
 
     const DVector2D& getLocation() const;
+    const DVector2D& getPrevLocation() const;
     RotationZ getRotationZ() const;
 
     void setActive(bool active);
@@ -31,6 +33,8 @@ public:
     void setLocation(int x, int y);
     void setRotationZ(RotationZ rotationZ);
 
+    void move(RotationZ direct, int scale);
+
     // Return pixel for draw him on screen
     virtual Pixel getDrawing() const;
 
@@ -38,6 +42,8 @@ public:
 
     // Execute each draw-tick (except for static-objects)
     virtual void tick(float deltaTime);
+
+    virtual void physTick();
 
     // Call on overlap object
     virtual void onOverlap(GameObject& object, DVector2D location);
@@ -52,6 +58,7 @@ protected:
 
     bool active_;
     bool isStatic_;
+    bool isMove_;
     bool blockObject_;
 
 private:
@@ -59,6 +66,7 @@ private:
     World* world;
 
     DVector2D location_;
+    DVector2D prevLocation_;
     RotationZ rotationZ_;
 
 };

@@ -56,22 +56,14 @@ void World::tick(float deltaTime)
                 go->tick(deltaTime);
         }
 
-        if (gameObjects.size() > 1)
-        {
-            for (vector<GameObject*>::iterator i = begin; i != end -1; ++i)
-            {
-                GameObject* go1 = *i;
+        handleCollision();
 
-                for (vector<GameObject*>::iterator j = i + 1; j != end; ++j)
-                {
-                    GameObject* go2 = *j;
-                    if (go1->getLocation() == go2->getLocation())
-                    {
-                        go1->onOverlap(*go2, go1->getLocation());
-                        go2->onOverlap(*go1, go2->getLocation());
-                    }
-                }
-            }
+        for (vector<GameObject*>::iterator i = begin; i != end; ++i)
+        {
+            GameObject* go = *i;
+
+            if (go->isActive() && !go->isStatic())
+                go->physTick();
         }
     }
 }
@@ -108,6 +100,33 @@ const vector<GameObject*>& World::getGameObjects() const
     return gameObjects;
 }
 
+GameObject* World::getGameObjectFromLocation(DVector2D location)
+{
+    GameObject* go = nullptr;
+
+    if (gameObjects.size() > 0)
+    {
+        vector<GameObject*>::iterator begin = gameObjects.begin();
+        vector<GameObject*>::iterator end = gameObjects.end();
+
+        for (vector<GameObject*>::iterator i = begin; i != end; ++i)
+        {
+            GameObject* curr = *i;
+            if (location == curr->getLocation())
+            {
+                go = curr;
+                break;
+            }
+        }
+    }
+    return go;
+}
+
+GameObject* World::getGameObjectFromLocation(int x, int y) 
+{
+    return getGameObjectFromLocation(DVector2D(x, y));
+}
+
 GameObject* World::createGameObject()
 {
     GameObject* go = createGameObject<GameObject>();
@@ -129,4 +148,43 @@ void World::destroyGameObject(const GameObject& gameObject)
     }
 
     delete &gameObject;
+}
+
+void World::handleCollision()
+{
+    if (gameObjects.size() > 1)
+    {
+        vector<GameObject*>::iterator begin = gameObjects.begin();
+        vector<GameObject*>::iterator end = gameObjects.end();
+
+        for (vector<GameObject*>::iterator i = begin; i != end - 1; ++i)
+        {
+            GameObject* go1 = *i;
+
+            for (vector<GameObject*>::iterator j = i + 1; j != end; ++j)
+            {
+                GameObject* go2 = *j;
+
+                DVector2D dCurr = go1->getLocation() - go2->getLocation();
+                DVector2D dPrev = go1->getPrevLocation() - go2->getPrevLocation();
+
+                bool block = go1->isBlockObject() && go2->isBlockObject();
+                bool intersect = (dCurr == DVector2D::zeroVector) || dCurr == (dPrev * -1.0f);
+
+                if (intersect) 
+                {
+                    go1->onOverlap(*go2, go1->getLocation());
+                    go2->onOverlap(*go1, go2->getLocation());
+
+                    if (block)
+                    {
+                        if (go1->isMove())
+                            go1->setLocation(go1->getPrevLocation());
+                        if (go2->isMove())
+                            go2->setLocation(go2->getPrevLocation());
+                    }
+                }
+            }
+        }
+    }
 }

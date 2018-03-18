@@ -38,6 +38,9 @@ typedef Vector2D<float> FVector2D;
 typedef Vector2D<int> DVector2D;
 
 template <typename T>
+Vector2D<T> Vector2D<T>::zeroVector = Vector2D<T>();
+
+template <typename T>
 Vector2D<T>::Vector2D() : x(T()), y(T())
 {
 }

@@ -1,3 +1,2 @@
-﻿  main.cpp
-c:\users\foxtrot\documents\crazytanks\crazytanks\main.cpp(18): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+﻿  GameObject.cpp
   CrazyTanks.vcxproj -> C:\Users\FOXTROT\Documents\CrazyTanks\x64\Debug\CrazyTanks.exe

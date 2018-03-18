@@ -10,6 +10,7 @@ GameObject::GameObject(World& world)
 {
     active_ = true;
     isStatic_ = false;
+    isMove_ = false;
     blockObject_ = true;
 }
 
@@ -27,6 +28,11 @@ bool GameObject::isStatic() const
     return isStatic_;
 }
 
+bool GameObject::isMove() const 
+{
+    return isMove_;
+}
+
 bool GameObject::isBlockObject() const
 {
     return blockObject_;
@@ -35,6 +41,11 @@ bool GameObject::isBlockObject() const
 const DVector2D& GameObject::getLocation() const
 {
     return location_;
+}
+
+const DVector2D& GameObject::getPrevLocation() const
+{
+    return prevLocation_;
 }
 
 RotationZ GameObject::getRotationZ() const
@@ -65,6 +76,27 @@ void GameObject::setLocation(int x, int y)
 void GameObject::setRotationZ(RotationZ rotationZ)
 {
     rotationZ_ = rotationZ;
+}
+
+void GameObject::move(RotationZ direct, int scale)
+{
+    DVector2D newLoc;
+    switch (getRotationZ())
+    {
+    case ROTATION_Z_DOWN:
+        newLoc = getLocation() + DVector2D(0, scale);
+        break;
+    case ROTATION_Z_UP:
+        newLoc = getLocation() + DVector2D(0, -scale);
+        break;
+    case ROTATION_Z_LEFT:
+        newLoc = getLocation() + DVector2D(-scale, 0);
+        break;
+    case ROTATION_Z_RIGHT:
+        newLoc = getLocation() + DVector2D(scale, 0);
+        break;
+    }
+    setLocation(newLoc);
 }
 
 Pixel GameObject::getDrawing() const
@@ -103,6 +135,11 @@ void GameObject::tick(float deltaTime)
 
     if (isOverstep)
         onOverstepBorder();
+}
+
+void GameObject::physTick()
+{
+    prevLocation_ = location_;
 }
 
 void GameObject::onOverlap(GameObject& object, DVector2D location)

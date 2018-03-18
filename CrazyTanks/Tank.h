@@ -24,7 +24,7 @@ public:
 
     void setIndexTeam(int indexTeam);
 
-    void move(RotationZ direct);
+    void startMove(RotationZ direct);
     void stopMove();
      
     void fire();
@@ -37,8 +37,6 @@ protected:
     float durationMove;
 
     int indexTeam_;
-
-    bool isMove_;
 };
 
 #endif // !TANK_H
