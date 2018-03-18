@@ -1,37 +1,63 @@
+// CrazyTanks game, @kusstas 2018. All Rights Reserved.
+
 #ifndef GAME_OBJECT_H
 #define GAME_OBJECT_H
 
-#include "World.h"
-#include "Vector2D.h"
-#include "RotationZ.h"
+#include "CoreMinimal.h"
 
+class World;
+class Pixel;
+
+// Evetything in the world is GameObject
 class GameObject
 {
 public:
 
-	GameObject(World& worldOwner, const DVector2D& location, RotationZ);
-	virtual ~GameObject();
+    GameObject(World& world);
 
-	bool isActive() const;
-	const DVector2D& getLocation() const;
-	RotationZ getRotationZ() const;
+    virtual ~GameObject();
 
-	void setActive(bool value);
-	void setLocation(const DVector2D& newLocation);
-	void setRotationZ(RotationZ newRotationZ);
+    bool isActive() const;
+    bool isStatic() const;
+    bool isBlockObject() const;
 
-	virtual void tick(float deltaTime);
+    const DVector2D& getLocation() const;
+    RotationZ getRotationZ() const;
 
-	void destroy();
+    void setActive(bool active);
+    void setBlockObject(bool blockObject);
+
+    void setLocation(const DVector2D& location);
+    void setLocation(int x, int y);
+    void setRotationZ(RotationZ rotationZ);
+
+    // Return pixel for draw him on screen
+    virtual Pixel getDrawing() const;
+
+    virtual void beginPlay();
+
+    // Execute each draw-tick (except for static-objects)
+    virtual void tick(float deltaTime);
+
+    // Call on overlap object
+    virtual void onOverlap(GameObject& object, DVector2D location);
+
+    // Call on overstep border of world
+    virtual void onOverstepBorder();
+
+    // Destroy object and remove from current world
+    void destroy();
 
 private:
 
-	World * worldOwner_;
+    World* world;
 
-	bool active_;
+    bool active_;
+    bool isStatic_;
+    bool blockObject_;
 
-	DVector2D location_;
-	RotationZ rotationZ_;
+    DVector2D location_;
+    RotationZ rotationZ_;
 
 };
 

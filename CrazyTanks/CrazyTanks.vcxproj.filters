@@ -19,36 +19,99 @@
     <Filter Include="Файлы заголовков\Engine">
       <UniqueIdentifier>{0059af5b-1a85-47dc-8d97-bae8e366ed1a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\Engine\GameObjects">
+      <UniqueIdentifier>{2918bfbb-b027-4a75-bc26-8da1e4958966}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Engine\GameObjects">
+      <UniqueIdentifier>{13774282-1b43-40b9-884a-5ae0285f2522}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Engine\MathTypes">
+      <UniqueIdentifier>{93f5dfe2-be72-48af-997d-92d53b068193}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Engine\Draw">
+      <UniqueIdentifier>{ee2ce2ea-92db-4099-8787-f229ef88f187}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Engine\Draw">
+      <UniqueIdentifier>{630fa2b3-b468-4ce4-b540-abd5993adbac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\CrazyTanks">
+      <UniqueIdentifier>{e7f28918-3547-415e-ab4d-fd89f47aa663}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\CrazyTanks">
+      <UniqueIdentifier>{38ba756a-63da-4036-b165-38aa3d5d97c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="GameInstance.cpp">
+    <ClCompile Include="World.cpp">
       <Filter>Исходные файлы\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Pixel.cpp">
+      <Filter>Исходные файлы\Engine\Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowsConsoleScreen.cpp">
+      <Filter>Исходные файлы\Engine\Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Исходные файлы\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="CrazyTanks.cpp">
+      <Filter>Исходные файлы\CrazyTanks</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldTanks.cpp">
+      <Filter>Исходные файлы\CrazyTanks</Filter>
+    </ClCompile>
+    <ClCompile Include="Tank.cpp">
+      <Filter>Исходные файлы\CrazyTanks</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Исходные файлы\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="World.cpp">
-      <Filter>Исходные файлы\Engine</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameInstance.h">
+    <ClInclude Include="World.h">
       <Filter>Файлы заголовков\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Vector2D.h">
+    <ClInclude Include="CoreMinimal.h">
       <Filter>Файлы заголовков\Engine</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>Файлы заголовков\Engine</Filter>
+      <Filter>Файлы заголовков\Engine\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>Файлы заголовков\Engine\MathTypes</Filter>
     </ClInclude>
     <ClInclude Include="RotationZ.h">
+      <Filter>Файлы заголовков\Engine\MathTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Pixel.h">
+      <Filter>Файлы заголовков\Engine\Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="Screen.h">
+      <Filter>Файлы заголовков\Engine\Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowsConsoleScreen.h">
+      <Filter>Файлы заголовков\Engine\Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
       <Filter>Файлы заголовков\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="World.h">
-      <Filter>Файлы заголовков\Engine</Filter>
+    <ClInclude Include="CrazyTanks.h">
+      <Filter>Файлы заголовков\CrazyTanks</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldTanks.h">
+      <Filter>Файлы заголовков\CrazyTanks</Filter>
+    </ClInclude>
+    <ClInclude Include="Tank.h">
+      <Filter>Файлы заголовков\CrazyTanks</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

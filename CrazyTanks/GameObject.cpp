@@ -1,46 +1,120 @@
-#include "GameObject.h"
+// CrazyTanks game, @kusstas 2018. All Rights Reserved.
 
-GameObject::GameObject(World& worldOwner)
+#include "GameObject.h"
+#include "World.h"
+
+#include "Pixel.h"
+
+GameObject::GameObject(World& world)
+    : world(&world)
 {
-	worldOwner_ = &worldOwner;
+    active_ = true;
+    isStatic_ = false;
+    blockObject_ = true;
+}
+
+GameObject::~GameObject()
+{
 }
 
 bool GameObject::isActive() const
 {
-	return active_;
+    return active_;
+}
+
+bool GameObject::isStatic() const
+{
+    return isStatic_;
+}
+
+bool GameObject::isBlockObject() const
+{
+    return blockObject_;
 }
 
 const DVector2D& GameObject::getLocation() const
 {
-	return location_;
+    return location_;
 }
 
 RotationZ GameObject::getRotationZ() const
 {
-	return rotationZ_;
+    return rotationZ_;
 }
 
-void GameObject::setActive(bool value)
+void GameObject::setActive(bool active)
 {
-	visibility_ = newVisibility;
+    active_ = active;
 }
 
-void GameObject::setLocation(const DVector2D& newLocation)
+void GameObject::setBlockObject(bool blockObject)
 {
-	location_ = newLocation;
+    blockObject_ = blockObject;
 }
 
-void GameObject::setRotationZ(RotationZ newRotationZ)
+void GameObject::setLocation(const DVector2D& locaction)
 {
-	rotationZ_ = newRotationZ;
+    location_ = locaction;
+}
+
+void GameObject::setLocation(int x, int y)
+{
+    setLocation(DVector2D(x, y));
+}
+
+void GameObject::setRotationZ(RotationZ rotationZ)
+{
+    rotationZ_ = rotationZ;
+}
+
+Pixel GameObject::getDrawing() const
+{
+    return Pixel('#', COLOR_LIGHT_GREEN, COLOR_BLACK);
+}
+
+void GameObject::beginPlay()
+{
 }
 
 void GameObject::tick(float deltaTime)
+{
+    DVector2D sizeWorld = world->getSize();
+
+    // Ban of going beyond the borders of the world
+
+    bool isOverstep = false;
+    if (location_.x < 0) {
+        location_.x = 0;
+        isOverstep = true;
+    }
+    else if (location_.x > sizeWorld.x - 1) {
+        location_.x = sizeWorld.x - 1;
+        isOverstep = true;
+    }
+
+    if (location_.y < 0) {
+        location_.y = 0;
+        isOverstep = true;
+    }
+    else if (location_.y > sizeWorld.y - 1) {
+        location_.y = sizeWorld.y - 1;
+        isOverstep = true;
+    }
+
+    if (isOverstep)
+        onOverstepBorder();
+}
+
+void GameObject::onOverlap(GameObject& object, DVector2D location)
+{
+}
+
+void GameObject::onOverstepBorder()
 {
 
 }
 
 void GameObject::destroy()
 {
-
+    world->destroyGameObject(*this);
 }
