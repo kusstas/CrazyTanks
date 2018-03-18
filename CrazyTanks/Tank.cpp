@@ -80,13 +80,13 @@ Pixel Tank::getDrawing() const
     switch (getRotationZ())
     {
     case ROTATION_Z_DOWN:
-        return Pixel('Y', COLOR_LIGHT_RED, COLOR_WHITE);
+        return Pixel('Y', COLOR_LIGHT_RED, COLOR_BLACK);
     case ROTATION_Z_UP:
-        return Pixel('A', COLOR_LIGHT_RED, COLOR_WHITE);
+        return Pixel('A', COLOR_LIGHT_RED, COLOR_BLACK);
     case ROTATION_Z_LEFT:
-        return Pixel('<', COLOR_LIGHT_RED, COLOR_WHITE);
+        return Pixel('<', COLOR_LIGHT_RED, COLOR_BLACK);
     case ROTATION_Z_RIGHT:
-        return Pixel('>', COLOR_LIGHT_RED, COLOR_WHITE);
+        return Pixel('>', COLOR_LIGHT_RED, COLOR_BLACK);
     }
     return Pixel('X', COLOR_LIGHT_RED, COLOR_BLACK);
 }

@@ -48,13 +48,15 @@ public:
     // Destroy object and remove from current world
     void destroy();
 
-private:
-
-    World* world;
+protected:
 
     bool active_;
     bool isStatic_;
     bool blockObject_;
+
+private:
+
+    World* world;
 
     DVector2D location_;
     RotationZ rotationZ_;

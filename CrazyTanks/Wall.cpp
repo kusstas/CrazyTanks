@@ -1,12 +1,14 @@
+// CrazyTanks game, @kusstas 2018. All Rights Reserved.
+
 #include "Wall.h"
+#include "Pixel.h"
 
-
-
-Wall::Wall()
+Wall::Wall(World& world) : GameObject(world)
 {
+    isStatic_ = true;
 }
 
-
-Wall::~Wall()
+Pixel Wall::getDrawing() const
 {
+    return Pixel('@', COLOR_LIGHT_BLUE, COLOR_BLACK);
 }

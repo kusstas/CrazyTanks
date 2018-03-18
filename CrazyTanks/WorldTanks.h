@@ -20,6 +20,7 @@ public:
 protected:
 
     void drawBorder(Screen& screen) const;
+    void generateWalls();
    
     Tank* tank;
 };

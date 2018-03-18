@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <ctime>
+#include <random>
 
 #include "CoreMinimal.h"
 #include "WindowsConsoleScreen.h"
@@ -10,10 +11,12 @@
 
 using namespace std;
 
-const int FPS_MAX = 30;
+const int FPS_MAX = 15;
 
 int main()
 {
+    srand(time(0));
+
     WindowsConsoleScreen screen;
     screen.setCursorVisible(false);
 

@@ -67,10 +67,10 @@
       <Filter>Исходные файлы\CrazyTanks</Filter>
     </ClCompile>
     <ClCompile Include="Wall.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\CrazyTanks</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Исходные файлы\Engine</Filter>
+      <Filter>Исходные файлы\Engine\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -111,7 +111,7 @@
       <Filter>Файлы заголовков\CrazyTanks</Filter>
     </ClInclude>
     <ClInclude Include="Wall.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Файлы заголовков\CrazyTanks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
