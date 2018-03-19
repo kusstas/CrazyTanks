@@ -3,6 +3,7 @@
 #include "WorldTanks.h"
 #include "GameObject.h"
 #include "PlayerTank.h"
+#include "EnemyTank.h"
 #include "Wall.h"
 
 #include "Screen.h"
@@ -19,13 +20,7 @@ WorldTanks::WorldTanks()
 
 void WorldTanks::beginPlay()
 {
-    Tank* t = createGameObject<PlayerTank>();
-    t->setLocation(1, 14);
-
-    t = createGameObject<Tank>();
-    t->setLocation(1, 3);
-    t->startMove(ROTATION_Z_DOWN);
-
+    generateTanks();
     generateWalls();
 }
 
@@ -114,4 +109,30 @@ void WorldTanks::generateWalls()
             }
         }
     }
+}
+
+void WorldTanks::generateTanks()
+{
+    int stepX = getSize().x / 3;
+    int stepY = getSize().y / 3;
+
+    DVector2D loc;
+
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 2; j++)
+        {    
+            loc.x = (rand() % (stepX - 1)) + stepX * i;
+            loc.y = (rand() % (stepY - 1)) + stepY * j;
+
+            Tank* t = createGameObject<EnemyTank>();
+            t->setLocation(loc);
+        }
+    }
+
+    loc.x = (rand() % (stepX - 1)) + stepX;
+    loc.y = (rand() % (stepY - 1)) + stepY * 2;
+
+    Tank* t = createGameObject<PlayerTank>();
+    t->setLocation(loc);
 }

@@ -47,6 +47,7 @@ protected:
 private:
 
     void handleCollision();
+    void destroyObjects();
 };
 
 template <class T>

@@ -60,20 +60,9 @@ void World::tick(float deltaTime)
 
         if (go->isActive() && !go->isStatic())
             go->physTick();
-    }
+    } 
 
-    // clear object
-    for (vector<GameObject*>::iterator i = gameObjects.begin(); i != gameObjects.end(); ++i)
-    {
-        GameObject* go = *i;
-        if (go->isShouldBeDestroyed())
-        {
-            vector<GameObject*>::iterator t = i - 1;
-            gameObjects.erase(i);
-            i = t;
-            delete go;
-        }
-    }
+    destroyObjects();
 }
 
 void World::draw(Screen& screen)
@@ -181,6 +170,30 @@ void World::handleCollision()
                     }
                 }
             }
+        }
+    }
+}
+
+void World::destroyObjects()
+{
+    for (vector<GameObject*>::iterator i = gameObjects.begin(); i != gameObjects.end(); ++i)
+    {
+        GameObject* go = *i;
+        if (go->isShouldBeDestroyed())
+        {
+            vector<GameObject*>::iterator t;
+            if (i == gameObjects.begin())
+            {
+                gameObjects.erase(i);
+                t = gameObjects.begin();
+            }
+            else
+            {
+                t = i - 1;
+                gameObjects.erase(i);
+            }         
+            i = t;
+            delete go;
         }
     }
 }

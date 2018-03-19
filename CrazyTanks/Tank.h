@@ -31,6 +31,7 @@ public:
     void stopMove();
      
     void fire();
+    void applyDamage();
 
 protected:
 

@@ -9,7 +9,7 @@
 
 Tank::Tank(World& world) : GameObject(world)
 {
-    maxLives_ = 1;
+    maxLives_ = 3;
     indexTeam_ = 0;
     durationMove = 0;
     isMove_ = false;
@@ -117,6 +117,13 @@ void Tank::fire()
         p->setRotationZ(getRotationZ());
         p->setLocation(getLocation());
 
-        coolDown = 0.2f;
+        coolDown = 0.4f;
     }
+}
+
+void Tank::applyDamage()
+{
+    lives_--;
+    if (lives_ == 0)
+        destroy();
 }

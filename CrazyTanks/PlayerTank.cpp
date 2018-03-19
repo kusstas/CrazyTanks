@@ -5,7 +5,6 @@
 
 PlayerTank::PlayerTank(World& world) : Tank(world)
 {
-    maxLives_ = 3;
     controller_ = new PlayerController();
     controller_->setPawn(*this);
 }

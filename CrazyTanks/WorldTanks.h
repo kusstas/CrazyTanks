@@ -21,6 +21,7 @@ protected:
 
     void drawBorder(Screen& screen) const;
     void generateWalls();
+    void generateTanks();
 };
 
 #endif !WORLD_TANKS_H

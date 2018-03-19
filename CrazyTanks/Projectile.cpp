@@ -29,7 +29,14 @@ void Projectile::onOverstepBorder()
 void Projectile::onOverlap(GameObject& object, DVector2D location)
 {
     if (&object != owner)
+    {
+        Tank* tank = dynamic_cast<Tank*>(&object);
+
+        if (tank != nullptr)
+            tank->applyDamage();
+
         destroy();
+    }     
 }
 
 Pixel Projectile::getDrawing() const
