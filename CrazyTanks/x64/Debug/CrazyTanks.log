@@ -1,9 +1,2 @@
-﻿  CrazyTanks.cpp
-  Game.cpp
-  GameObject.cpp
-  Tank.cpp
-  World.cpp
-  WorldTanks.cpp
-  main.cpp
-  Создание кода...
+﻿  AiController.cpp
   CrazyTanks.vcxproj -> C:\Users\FOXTROT\Documents\CrazyTanks\x64\Debug\CrazyTanks.exe

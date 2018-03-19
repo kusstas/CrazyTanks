@@ -115,6 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AiController.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="CrazyTanks.cpp" />
     <ClCompile Include="EnemyTank.cpp" />
@@ -132,6 +133,7 @@
     <ClCompile Include="WorldTanks.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AiController.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="CoreMinimal.h" />
     <ClInclude Include="CrazyTanks.h" />

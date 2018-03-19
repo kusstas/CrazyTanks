@@ -33,7 +33,10 @@ void Projectile::onOverlap(GameObject& object, DVector2D location)
         Tank* tank = dynamic_cast<Tank*>(&object);
 
         if (tank != nullptr)
-            tank->applyDamage();
+        {
+            if (tank->getIndexTeam() != owner->getIndexTeam())
+                tank->applyDamage();
+        }    
 
         destroy();
     }     

@@ -7,9 +7,9 @@
 enum RotationZ : int
 {
     ROTATION_Z_UP = 0,
-    ROTATION_Z_RIGHT = 90,
-    ROTATION_Z_DOWN = 180,
-    ROTATION_Z_LEFT = 270,
+    ROTATION_Z_RIGHT = 1,
+    ROTATION_Z_DOWN = 2,
+    ROTATION_Z_LEFT = 3,
 };
 
 #endif // !ROTATION_Z_H

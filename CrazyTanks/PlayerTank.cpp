@@ -5,6 +5,7 @@
 
 PlayerTank::PlayerTank(World& world) : Tank(world)
 {
+    maxDurationMove = 0.05f;
+
     controller_ = new PlayerController();
-    controller_->setPawn(*this);
 }

@@ -16,8 +16,6 @@ public:
 
     virtual void beginPlay() override;
     virtual void tick(float deltaTime);
-    virtual void onOverlap(GameObject& object, DVector2D location) override;
-
 
     virtual Pixel getDrawing() const override;
 
@@ -39,6 +37,7 @@ protected:
     int lives_;
 
     float durationMove;
+    float maxDurationMove;
     float coolDown;
     bool isMove_;
 

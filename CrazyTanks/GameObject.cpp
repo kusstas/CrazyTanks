@@ -144,6 +144,37 @@ void GameObject::tick(float deltaTime)
         onOverstepBorder();
 }
 
+GameObject* GameObject::trace(RotationZ direct, int distance)
+{
+    DVector2D tracer;
+    switch (direct)
+    {
+    case ROTATION_Z_DOWN:
+        tracer = DVector2D(0, 1);
+        break;
+    case ROTATION_Z_UP:
+        tracer = DVector2D(0, -1);
+        break;
+    case ROTATION_Z_LEFT:
+        tracer = DVector2D(-1, 0);
+        break;
+    case ROTATION_Z_RIGHT:
+        tracer = DVector2D(1, 0);
+        break;
+    }
+
+    for (int i = 1; i <= distance; i++)
+    {
+        DVector2D loc = tracer * static_cast<float>(i);
+        loc += location_;
+        GameObject* goRes = getWorld()->getGameObjectFromLocation(loc);
+
+        if (goRes != nullptr)
+            return goRes;
+    }
+    return nullptr;
+}
+
 void GameObject::physTick()
 {
     prevLocation_ = location_;
@@ -155,7 +186,6 @@ void GameObject::onOverlap(GameObject& object, DVector2D location)
 
 void GameObject::onOverstepBorder()
 {
-
 }
 
 void GameObject::destroy()

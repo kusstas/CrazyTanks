@@ -9,8 +9,10 @@
 
 Tank::Tank(World& world) : GameObject(world)
 {
+    maxDurationMove = 0.2f;
     maxLives_ = 3;
     indexTeam_ = 0;
+
     durationMove = 0;
     isMove_ = false;
 
@@ -28,6 +30,9 @@ void Tank::beginPlay()
     GameObject::beginPlay();
 
     lives_ = maxLives_;
+    
+    if (controller_ != nullptr)
+        controller_->setPawn(*this);
 }
 
 void Tank::tick(float deltaTime)
@@ -38,7 +43,7 @@ void Tank::tick(float deltaTime)
     if (isMove_)
     {
         durationMove += deltaTime;
-        if (durationMove > 0.05f)
+        if (durationMove >= maxDurationMove)
         {
             durationMove = 0;
             GameObject::move(getRotationZ(), 1);
@@ -47,10 +52,6 @@ void Tank::tick(float deltaTime)
 
     coolDown -= deltaTime;
     GameObject::tick(deltaTime);
-}
-
-void Tank::onOverlap(GameObject& object, DVector2D location)
-{
 }
 
 Pixel Tank::getDrawing() const

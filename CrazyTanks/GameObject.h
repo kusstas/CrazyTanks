@@ -46,6 +46,9 @@ public:
     // Update previos location
     virtual void physTick();
 
+    // Find object by trace
+    GameObject* trace(RotationZ direct, int distance);
+
     // Call on overlap object
     virtual void onOverlap(GameObject& object, DVector2D location);
 
