@@ -43,27 +43,35 @@ void World::beginPlay()
 
 void World::tick(float deltaTime)
 {
-    if (gameObjects.size() > 0)
+    for (int i = 0; i < gameObjects.size(); i++)
     {
-        vector<GameObject*>::iterator begin = gameObjects.begin();
-        vector<GameObject*>::iterator end = gameObjects.end();
+        GameObject* go = gameObjects[i];
 
-        for (vector<GameObject*>::iterator i = begin; i != end; ++i)
+        if (go->isActive() && !go->isStatic())
+            go->tick(deltaTime);
+    }
+
+    handleCollision();
+
+    // phys tick
+    for (int i = 0; i < gameObjects.size(); i++)
+    {
+        GameObject* go = gameObjects[i];
+
+        if (go->isActive() && !go->isStatic())
+            go->physTick();
+    }
+
+    // clear object
+    for (vector<GameObject*>::iterator i = gameObjects.begin(); i != gameObjects.end(); ++i)
+    {
+        GameObject* go = *i;
+        if (go->isShouldBeDestroyed())
         {
-            GameObject* go = *i;
-
-            if (go->isActive() && !go->isStatic())
-                go->tick(deltaTime);
-        }
-
-        handleCollision();
-
-        for (vector<GameObject*>::iterator i = begin; i != end; ++i)
-        {
-            GameObject* go = *i;
-
-            if (go->isActive() && !go->isStatic())
-                go->physTick();
+            vector<GameObject*>::iterator t = i - 1;
+            gameObjects.erase(i);
+            i = t;
+            delete go;
         }
     }
 }
@@ -122,7 +130,7 @@ GameObject* World::getGameObjectFromLocation(DVector2D location)
     return go;
 }
 
-GameObject* World::getGameObjectFromLocation(int x, int y) 
+GameObject* World::getGameObjectFromLocation(int x, int y)
 {
     return getGameObjectFromLocation(DVector2D(x, y));
 }
@@ -131,23 +139,6 @@ GameObject* World::createGameObject()
 {
     GameObject* go = createGameObject<GameObject>();
     return go;
-}
-
-void World::destroyGameObject(const GameObject& gameObject)
-{
-    vector<GameObject*>::iterator begin = gameObjects.begin();
-    vector<GameObject*>::iterator end = gameObjects.end();
-
-    for (vector<GameObject*>::iterator i = begin; i != end; ++i)
-    {
-        if (&gameObject == *i)
-        {
-            gameObjects.erase(i);
-            break;
-        }
-    }
-
-    delete &gameObject;
 }
 
 void World::handleCollision()
@@ -161,27 +152,33 @@ void World::handleCollision()
         {
             GameObject* go1 = *i;
 
-            for (vector<GameObject*>::iterator j = i + 1; j != end; ++j)
+            for (vector<GameObject*>::iterator j = begin; j != end; ++j)
             {
                 GameObject* go2 = *j;
 
-                DVector2D dCurr = go1->getLocation() - go2->getLocation();
-                DVector2D dPrev = go1->getPrevLocation() - go2->getPrevLocation();
+                if (go1 == go2)
+                    continue;
+
+                DVector2D v1 = go1->getLocation() - go1->getPrevLocation();
+                DVector2D v2 = go2->getLocation() - go2->getPrevLocation();
 
                 bool block = go1->isBlockObject() && go2->isBlockObject();
-                bool intersect = (dCurr == DVector2D::zeroVector) || dCurr == (dPrev * -1.0f);
+                bool intersect = go1->getLocation() == go2->getLocation();
 
-                if (intersect) 
+                if (v1 != DVector2D::zeroVector && v2 != DVector2D::zeroVector)
+                {
+                    intersect = intersect || go1->getLocation() == go2->getPrevLocation();
+                }
+
+                if (intersect)
                 {
                     go1->onOverlap(*go2, go1->getLocation());
                     go2->onOverlap(*go1, go2->getLocation());
 
                     if (block)
                     {
-                        if (go1->isMove())
-                            go1->setLocation(go1->getPrevLocation());
-                        if (go2->isMove())
-                            go2->setLocation(go2->getPrevLocation());
+                        go1->setLocation(go1->getPrevLocation());
+                        go2->setLocation(go2->getPrevLocation());
                     }
                 }
             }

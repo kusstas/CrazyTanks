@@ -10,8 +10,8 @@ GameObject::GameObject(World& world)
 {
     active_ = true;
     isStatic_ = false;
-    isMove_ = false;
     blockObject_ = true;
+    shouldBeDestroyed_ = false;
 }
 
 GameObject::~GameObject()
@@ -28,14 +28,14 @@ bool GameObject::isStatic() const
     return isStatic_;
 }
 
-bool GameObject::isMove() const 
-{
-    return isMove_;
-}
-
 bool GameObject::isBlockObject() const
 {
     return blockObject_;
+}
+
+bool GameObject::isShouldBeDestroyed() const
+{
+    return shouldBeDestroyed_;
 }
 
 const DVector2D& GameObject::getLocation() const
@@ -53,6 +53,11 @@ RotationZ GameObject::getRotationZ() const
     return rotationZ_;
 }
 
+World* GameObject::getWorld() const
+{
+    return world;
+}
+
 void GameObject::setActive(bool active)
 {
     active_ = active;
@@ -66,6 +71,8 @@ void GameObject::setBlockObject(bool blockObject)
 void GameObject::setLocation(const DVector2D& locaction)
 {
     location_ = locaction;
+    if (isStatic())
+        prevLocation_ = location_;
 }
 
 void GameObject::setLocation(int x, int y)
@@ -153,5 +160,5 @@ void GameObject::onOverstepBorder()
 
 void GameObject::destroy()
 {
-    world->destroyGameObject(*this);
+    shouldBeDestroyed_ = true;
 }

@@ -37,8 +37,6 @@ public:
     T* createGameObject();
     GameObject* createGameObject();
 
-    void destroyGameObject(const GameObject& gameObject);
-
 protected:
 
     DVector2D size_;

@@ -19,8 +19,8 @@ public:
 
     bool isActive() const;
     bool isStatic() const;
-    bool isMove() const;
     bool isBlockObject() const;
+    bool isShouldBeDestroyed() const;
 
     const DVector2D& getLocation() const;
     const DVector2D& getPrevLocation() const;
@@ -43,6 +43,7 @@ public:
     // Execute each draw-tick (except for static-objects)
     virtual void tick(float deltaTime);
 
+    // Update previos location
     virtual void physTick();
 
     // Call on overlap object
@@ -56,9 +57,10 @@ public:
 
 protected:
 
+    World* getWorld() const;
+
     bool active_;
     bool isStatic_;
-    bool isMove_;
     bool blockObject_;
 
 private:
@@ -68,6 +70,8 @@ private:
     DVector2D location_;
     DVector2D prevLocation_;
     RotationZ rotationZ_;
+
+    bool shouldBeDestroyed_;
 
 };
 

@@ -120,6 +120,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Pixel.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="WindowsConsoleScreen.cpp" />
@@ -132,6 +133,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Pixel.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="RotationZ.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="Tank.h" />

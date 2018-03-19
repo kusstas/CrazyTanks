@@ -35,6 +35,8 @@ protected:
     int lives_;
 
     float durationMove;
+    float coolDown;
+    bool isMove_;
 
     int indexTeam_;
 };

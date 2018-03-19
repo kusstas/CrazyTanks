@@ -39,7 +39,8 @@ void WorldTanks::tick(float deltaTime)
         int ch = _getch();
         if (ch == 0 || ch == 0xE0)
         {
-            switch (_getch())
+            ch = _getch();
+            switch (ch)
             {
             case 72:
                 tank->startMove(ROTATION_Z_UP);
@@ -55,6 +56,15 @@ void WorldTanks::tick(float deltaTime)
                 break;
             default:
                 tank->stopMove();
+                break;
+            }
+        }
+        else
+        {
+            switch (ch)
+            {
+            case ' ':
+                tank->fire();
                 break;
             }
         }

@@ -1,6 +1,9 @@
 ﻿// CrazyTanks game, @kusstas 2018. All Rights Reserved.
 
 #include "Tank.h"
+#include "World.h"
+#include "Projectile.h"
+
 #include "Pixel.h"
 
 Tank::Tank(World& world) : GameObject(world)
@@ -8,6 +11,7 @@ Tank::Tank(World& world) : GameObject(world)
     maxLives_ = 1;
     indexTeam_ = 0;
     durationMove = 0;
+    isMove_ = false;
 }
 
 void Tank::beginPlay()
@@ -29,6 +33,7 @@ void Tank::tick(float deltaTime)
         }       
     }
 
+    coolDown -= deltaTime;
     GameObject::tick(deltaTime);
 }
 
@@ -86,4 +91,16 @@ void Tank::stopMove()
 
 void Tank::fire()
 {
+    if (coolDown <= 0.0f)
+    {
+        Projectile* p = getWorld()->createGameObject<Projectile>();
+        p->SetTankOwner(*this);
+
+        p->setRotationZ(getRotationZ());
+        p->setLocation(getLocation());
+
+        p->move(getRotationZ(), 1);
+
+        coolDown = 0.2f;
+    }
 }

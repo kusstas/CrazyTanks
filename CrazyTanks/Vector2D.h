@@ -25,6 +25,7 @@ struct Vector2D
     const Vector2D<T>& operator *= (float scale);
 
     bool operator == (const Vector2D<T>& vector) const;
+    bool operator != (const Vector2D<T>& vector) const;
 
     float getLength() const;
 
@@ -98,6 +99,12 @@ template <typename T>
 bool Vector2D<T>::operator == (const Vector2D<T>& vector) const
 {
     return x == vector.x && y == vector.y;
+}
+
+template <typename T>
+bool Vector2D<T>::operator != (const Vector2D<T>& vector) const
+{
+    return x != vector.x || y != vector.y;
 }
 
 template <typename T>
