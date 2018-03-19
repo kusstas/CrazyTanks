@@ -178,7 +178,6 @@ void World::handleCollision()
                     if (block)
                     {
                         go1->setLocation(go1->getPrevLocation());
-                        go2->setLocation(go2->getPrevLocation());
                     }
                 }
             }
