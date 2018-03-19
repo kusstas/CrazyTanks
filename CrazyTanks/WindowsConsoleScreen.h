@@ -18,6 +18,8 @@ public:
 
     virtual void draw(int x, int y, const Pixel& pixel) override;
 
+    virtual void draw(int x, int y, const char* str) override;
+
     virtual void clear() override;
 
 private:

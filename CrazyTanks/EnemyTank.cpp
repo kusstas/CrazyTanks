@@ -7,13 +7,22 @@
 
 #include "Pixel.h"
 
+int EnemyTank::count = 0;
 
 EnemyTank::EnemyTank(World& world) : Tank(world)
 {
+    count++;
+
+    maxCoolDown = 0.8f;
     maxDurationMove = 0.25f;
     indexTeam_ = 1;
 
     controller_ = new AiController();
+}
+
+EnemyTank::~EnemyTank()
+{
+    count--;
 }
 
 Pixel EnemyTank::getDrawing() const
@@ -44,4 +53,9 @@ void EnemyTank::onOverstepBorder()
 
     if (aiController_)
         aiController_->onCollision();
+}
+
+int EnemyTank::getCount()
+{
+    return count;
 }

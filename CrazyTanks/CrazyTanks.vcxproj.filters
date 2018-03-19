@@ -88,7 +88,7 @@
       <Filter>Исходные файлы\CrazyTanks</Filter>
     </ClCompile>
     <ClCompile Include="AiController.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\CrazyTanks</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -147,7 +147,7 @@
       <Filter>Файлы заголовков\CrazyTanks</Filter>
     </ClInclude>
     <ClInclude Include="AiController.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Файлы заголовков\CrazyTanks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

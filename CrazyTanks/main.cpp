@@ -11,7 +11,7 @@
 
 using namespace std;
 
-const int FPS_MAX = 10;
+const int FPS_MAX = 15;
 
 int main()
 {

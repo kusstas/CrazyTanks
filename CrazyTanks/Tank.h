@@ -39,6 +39,7 @@ protected:
     float durationMove;
     float maxDurationMove;
     float coolDown;
+    float maxCoolDown;
     bool isMove_;
 
     int indexTeam_;

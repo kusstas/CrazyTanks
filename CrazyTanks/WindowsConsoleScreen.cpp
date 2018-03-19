@@ -3,6 +3,7 @@
 #include "WindowsConsoleScreen.h"
 
 #include <conio.h>
+#include <iostream>
 
 WindowsConsoleScreen::WindowsConsoleScreen()
 {
@@ -41,6 +42,18 @@ void WindowsConsoleScreen::draw(int x, int y, const Pixel& pixel)
     textArr = static_cast<WORD>(((bg << 4) | ch));
 
     SetConsoleTextAttribute(hConsoleOutput, textArr);
+}
+
+void WindowsConsoleScreen::draw(int x, int y, const char* str)
+{
+    // Set cursor
+    COORD point;
+    point.X = static_cast<SHORT>(x);
+    point.Y = static_cast<SHORT>(y);
+
+    SetConsoleCursorPosition(hConsoleOutput, point);
+
+    std::cout << str;
 }
 
 void WindowsConsoleScreen::clear()

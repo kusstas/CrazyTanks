@@ -10,10 +10,12 @@
 Tank::Tank(World& world) : GameObject(world)
 {
     maxDurationMove = 0.2f;
+    maxCoolDown = 0.4f;
     maxLives_ = 3;
     indexTeam_ = 0;
 
-    durationMove = 0;
+    coolDown = 0.0f;
+    durationMove = 0.0f;
     isMove_ = false;
 
     controller_ = nullptr;
@@ -118,7 +120,7 @@ void Tank::fire()
         p->setRotationZ(getRotationZ());
         p->setLocation(getLocation());
 
-        coolDown = 0.4f;
+        coolDown = maxCoolDown;
     }
 }
 

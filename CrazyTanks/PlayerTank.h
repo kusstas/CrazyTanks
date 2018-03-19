@@ -8,7 +8,15 @@
 class PlayerTank : public Tank
 {
 public:
+
     PlayerTank(World& world);
+    ~PlayerTank();
+
+    static const PlayerTank* getInstance();
+
+public:
+
+    static PlayerTank* instance;
 };
 
 #endif // !PLAYER_TANK_H

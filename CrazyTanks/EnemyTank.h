@@ -12,6 +12,7 @@ class EnemyTank : public Tank
 public:
 
     EnemyTank(World& world);
+    ~EnemyTank();
     
     virtual Pixel getDrawing() const override;
 
@@ -20,9 +21,11 @@ public:
     virtual void onOverlap(GameObject& object, DVector2D location);
     virtual void onOverstepBorder();
 
-    GameObject* trace(RotationZ direct, int distance);
+    static int getCount();
 
 private:
+
+    static int count;
 
     AiController* aiController_;
 };

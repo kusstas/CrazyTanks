@@ -10,6 +10,12 @@ class CrazyTanks : public Game
 public:
 
     virtual void beginPlay() override;
+    virtual void tick(float deltaTime) override;
+    virtual void draw(Screen& screen) override;
+
+private:
+
+    int lives;
 };
 
 #endif // !CRAZY_TANKS_H

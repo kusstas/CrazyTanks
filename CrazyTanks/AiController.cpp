@@ -16,21 +16,44 @@ void AiController::tick(float deltaTime)
         timerChange = 0.0f;
     }
 
-    PlayerTank* pt;
-    pt = dynamic_cast<PlayerTank*>(pawn_->trace(moveDirect_, 15));
+    
+    PlayerTank* ptUp = dynamic_cast<PlayerTank*>(pawn_->trace(ROTATION_Z_UP, 15));
+    PlayerTank* ptDn= dynamic_cast<PlayerTank*>(pawn_->trace(ROTATION_Z_DOWN, 15));
+    PlayerTank* ptLt = dynamic_cast<PlayerTank*>(pawn_->trace(ROTATION_Z_LEFT, 15));
+    PlayerTank* ptRt = dynamic_cast<PlayerTank*>(pawn_->trace(ROTATION_Z_RIGHT, 15));
 
-    if (pt != nullptr)
+    bool isFire = false;
+
+    if (ptUp != nullptr)
     {
-        pawn_->fire();
+        pawn_->setRotationZ(ROTATION_Z_UP);
+        isFire = true;
+    }
+    else if (ptDn != nullptr)
+    {
+        pawn_->setRotationZ(ROTATION_Z_DOWN);
+        isFire = true;
+    }
+    else if (ptLt != nullptr)
+    {
+        pawn_->setRotationZ(ROTATION_Z_LEFT);
+        isFire = true;
+    }
+    else if (ptRt != nullptr)
+    {
+        pawn_->setRotationZ(ROTATION_Z_RIGHT); 
+        isFire = true;
     }
     else
     {
-
+        pawn_->startMove(moveDirect_);
     }
 
-    
-
-    pawn_->startMove(moveDirect_);
+    if (isFire)
+    {
+        pawn_->fire();
+        timerChange = 0.0f;
+    }
 }
 
 void AiController::onCollision()
