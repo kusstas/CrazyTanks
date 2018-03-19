@@ -43,18 +43,24 @@ void Tank::onOverlap(GameObject& object, DVector2D location)
 
 Pixel Tank::getDrawing() const
 {
+    Pixel p;
+    p.setColorSymbol(COLOR_LIGHT_RED);
     switch (getRotationZ())
     {
     case ROTATION_Z_DOWN:
-        return Pixel('V', COLOR_LIGHT_RED, COLOR_BLACK);
+        p.setSymbol('V');
+        break;
     case ROTATION_Z_UP:
-        return Pixel('A', COLOR_LIGHT_RED, COLOR_BLACK);
+        p.setSymbol('A');
+        break;
     case ROTATION_Z_LEFT:
-        return Pixel('<', COLOR_LIGHT_RED, COLOR_BLACK);
+        p.setSymbol('<');
+        break;
     case ROTATION_Z_RIGHT:
-        return Pixel('>', COLOR_LIGHT_RED, COLOR_BLACK);
+        p.setSymbol('>');
+        break;
     }
-    return Pixel('X', COLOR_LIGHT_RED, COLOR_BLACK);
+    return p;
 }
 
 int Tank::getIndexTeam() const
@@ -98,8 +104,6 @@ void Tank::fire()
 
         p->setRotationZ(getRotationZ());
         p->setLocation(getLocation());
-
-        p->move(getRotationZ(), 1);
 
         coolDown = 0.2f;
     }

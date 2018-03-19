@@ -65,7 +65,7 @@ protected:
 
 private:
 
-    World* world;
+    World * world;
 
     DVector2D location_;
     DVector2D prevLocation_;

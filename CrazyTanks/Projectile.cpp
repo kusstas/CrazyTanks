@@ -1,4 +1,5 @@
 #include "Projectile.h"
+#include "Tank.h"
 
 #include "Pixel.h"
 
@@ -11,12 +12,12 @@ Projectile::Projectile(World& world) : GameObject(world)
 void Projectile::tick(float deltaTime)
 {
     durationMove += deltaTime;
-    if (durationMove > 0.025f)
+    if (durationMove > 0.01f)
     {
         durationMove = 0;
         GameObject::move(getRotationZ(), 1);
     }
-    
+
     GameObject::tick(deltaTime);
 }
 
@@ -27,7 +28,8 @@ void Projectile::onOverstepBorder()
 
 void Projectile::onOverlap(GameObject& object, DVector2D location)
 {
-    destroy();
+    if (&object != owner)
+        destroy();
 }
 
 Pixel Projectile::getDrawing() const

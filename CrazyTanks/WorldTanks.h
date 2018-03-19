@@ -12,7 +12,7 @@ class WorldTanks : public World
 public:
 
     WorldTanks();
-    
+
     virtual void beginPlay() override;
     virtual void tick(float deltaTime) override;
     virtual void draw(Screen& screen) override;
@@ -21,7 +21,7 @@ protected:
 
     void drawBorder(Screen& screen) const;
     void generateWalls();
-   
+
     Tank* tank;
 };
 

@@ -13,7 +13,6 @@ Game::~Game()
 
 void Game::beginPlay()
 {
-
 }
 
 void Game::tick(float deltaTime)
