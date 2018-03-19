@@ -3,6 +3,7 @@
 #include "Tank.h"
 #include "World.h"
 #include "Projectile.h"
+#include "Controller.h"
 
 #include "Pixel.h"
 
@@ -12,6 +13,14 @@ Tank::Tank(World& world) : GameObject(world)
     indexTeam_ = 0;
     durationMove = 0;
     isMove_ = false;
+
+    controller_ = nullptr;
+}
+
+Tank::~Tank()
+{
+    if (controller_ != nullptr)
+        delete controller_;
 }
 
 void Tank::beginPlay()
@@ -23,6 +32,9 @@ void Tank::beginPlay()
 
 void Tank::tick(float deltaTime)
 {
+    if (controller_ != nullptr)
+        controller_->tick(deltaTime);
+
     if (isMove_)
     {
         durationMove += deltaTime;
@@ -30,7 +42,7 @@ void Tank::tick(float deltaTime)
         {
             durationMove = 0;
             GameObject::move(getRotationZ(), 1);
-        }       
+        }
     }
 
     coolDown -= deltaTime;

@@ -5,11 +5,14 @@
 
 #include "GameObject.h"
 
+class Controller;
+
 class Tank : public GameObject
 {
 public:
 
     Tank(World& world);
+    virtual ~Tank();
 
     virtual void beginPlay() override;
     virtual void tick(float deltaTime);
@@ -39,6 +42,8 @@ protected:
     bool isMove_;
 
     int indexTeam_;
+
+    Controller* controller_;
 };
 
 #endif // !TANK_H

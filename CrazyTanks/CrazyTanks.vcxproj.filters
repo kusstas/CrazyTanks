@@ -75,6 +75,15 @@
     <ClCompile Include="Projectile.cpp">
       <Filter>Исходные файлы\CrazyTanks</Filter>
     </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Исходные файлы\CrazyTanks</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>Исходные файлы\CrazyTanks</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerTank.cpp">
+      <Filter>Исходные файлы\CrazyTanks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="World.h">
@@ -117,6 +126,15 @@
       <Filter>Файлы заголовков\CrazyTanks</Filter>
     </ClInclude>
     <ClInclude Include="Projectile.h">
+      <Filter>Файлы заголовков\CrazyTanks</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Файлы заголовков\CrazyTanks</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Файлы заголовков\CrazyTanks</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerTank.h">
       <Filter>Файлы заголовков\CrazyTanks</Filter>
     </ClInclude>
   </ItemGroup>

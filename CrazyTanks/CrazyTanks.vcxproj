@@ -115,11 +115,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="CrazyTanks.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Pixel.cpp" />
+    <ClCompile Include="PlayerController.cpp" />
+    <ClCompile Include="PlayerTank.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="Wall.cpp" />
@@ -128,11 +131,14 @@
     <ClCompile Include="WorldTanks.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="CoreMinimal.h" />
     <ClInclude Include="CrazyTanks.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Pixel.h" />
+    <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="PlayerTank.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="RotationZ.h" />
     <ClInclude Include="Screen.h" />

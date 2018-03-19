@@ -2,30 +2,27 @@
 
 #include "WorldTanks.h"
 #include "GameObject.h"
-#include "Tank.h"
+#include "PlayerTank.h"
 #include "Wall.h"
 
 #include "Screen.h"
 #include "Pixel.h"
 
 #include <stdio.h>
-#include <conio.h>
 #include <random>
 
 WorldTanks::WorldTanks()
 {
     offsetWorld_ = DVector2D(1, 1);
     size_ = DVector2D(40, 17);
-    tank = nullptr;
 }
 
 void WorldTanks::beginPlay()
 {
-    generateWalls();
-    tank = createGameObject<Tank>();
-    tank->setLocation(1, 14);
+    Tank* t = createGameObject<PlayerTank>();
+    t->setLocation(1, 14);
 
-    Tank* t = createGameObject<Tank>();
+    t = createGameObject<Tank>();
     t->setLocation(1, 3);
     t->startMove(ROTATION_Z_DOWN);
 
@@ -34,46 +31,6 @@ void WorldTanks::beginPlay()
 
 void WorldTanks::tick(float deltaTime)
 {
-    if (_kbhit())
-    {
-        int ch = _getch();
-        if (ch == 0 || ch == 0xE0)
-        {
-            ch = _getch();
-            switch (ch)
-            {
-            case 72:
-                tank->startMove(ROTATION_Z_UP);
-                break;
-            case 75:
-                tank->startMove(ROTATION_Z_LEFT);
-                break;
-            case 77:
-                tank->startMove(ROTATION_Z_RIGHT);
-                break;
-            case 80:
-                tank->startMove(ROTATION_Z_DOWN);
-                break;
-            default:
-                tank->stopMove();
-                break;
-            }
-        }
-        else
-        {
-            switch (ch)
-            {
-            case ' ':
-                tank->fire();
-                break;
-            }
-        }
-    }
-    else
-    {
-        tank->stopMove();
-    }
-
     World::tick(deltaTime);
 }
 
